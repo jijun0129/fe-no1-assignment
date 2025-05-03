@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="main.js" defer></script>
+    <title>무비파인더 - 영화 검색</title>
+  </head>
+  <body>
+    <header>
+      <h1>MovieFinder</h1>
+      <div class="searchBar">
+        <input type="text" id="searchInput" placeholder="영화 제목을 입력하세요" />
+        <button id="searchButton">검색</button>
+      </div>
+      <div class="searchType">
+        <div id="popularMovie">인기 영화</div>
+        <div id="bookmarkMovie">북마크한 영화</div>
+      </div>
+    </header>
+    <main>
+      <p id="searchTitle"></p>
+      <p id="searchError"></p>
+      <section id="searchResults"></section>
+    </main>
+    <footer>
+      <p>2025 Movie Search Project</p>
+    </footer>
+  </body>
+</html>
