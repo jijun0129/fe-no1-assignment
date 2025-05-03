@@ -42,6 +42,7 @@ searchButton.addEventListener("click", async () => {
   searchResults.innerHTML = ""; // 이전 검색 결과 초기화
 
   if (data.length === 0) {
+    searchTitle.innerHTML = "";
     const searchError = document.getElementById("searchError");
     searchError.innerHTML = "검색 결과가 없습니다.";
     return;
