@@ -28,7 +28,14 @@ popularMovie.addEventListener("click", async () => {
   await getPopularMovies();
 });
 
+const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
+searchInput.addEventListener("keypress", async (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    searchButton.click();
+  }
+});
 searchButton.addEventListener("click", async () => {
   const searchInput = document.getElementById("searchInput");
   const query = searchInput.value;
@@ -39,8 +46,7 @@ searchButton.addEventListener("click", async () => {
   const searchTitle = document.getElementById("searchTitle");
   searchTitle.innerHTML = "검색 결과";
   const searchResults = document.getElementById("searchResults");
-  searchResults.innerHTML = ""; // 이전 검색 결과 초기화
-
+  searchResults.innerHTML = "";
   if (data.length === 0) {
     searchTitle.innerHTML = "";
     const searchError = document.getElementById("searchError");
@@ -76,11 +82,9 @@ function showModal(movie) {
   const oldModal = document.getElementById("movieModal");
   if (oldModal) oldModal.remove();
 
-  // 모달 요소 생성
   const modal = document.createElement("div");
   modal.id = "modal";
 
-  // 모달 내용
   modal.innerHTML = `
     <div id="movieModal">
       <button id="closeModalButton">&times;</button>
@@ -98,12 +102,10 @@ function showModal(movie) {
     </div>
   `;
 
-  // 모달 닫기 버튼 이벤트
   modal.querySelector("#closeModalButton").addEventListener("click", () => {
     modal.remove();
   });
 
-  // 모달 바깥 클릭 시 닫기
   modal.addEventListener("click", (e) => {
     if (e.target === modal) modal.remove();
   });
