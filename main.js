@@ -4,7 +4,7 @@ async function getPopularMovies() {
   const top5Movies = await Top5Movies();
 
   const searchTitle = document.getElementById("searchTitle");
-  searchTitle.innerHTML = "인기 영화";
+  searchTitle.innerHTML = "인기 Top 5 영화";
   const searchResults = document.getElementById("searchResults");
   searchResults.innerHTML = "";
   top5Movies.forEach((movie, index) => {
@@ -82,7 +82,7 @@ function showModal(movie) {
   // 모달 내용
   modal.innerHTML = `
     <div id="movieModal">
-      <button id="closeModalBtn">&times;</button>
+      <button id="closeModalButton">&times;</button>
       <div>
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" id="modalImage"">
       </div>
@@ -98,7 +98,7 @@ function showModal(movie) {
   `;
 
   // 모달 닫기 버튼 이벤트
-  modal.querySelector("#closeModalBtn").addEventListener("click", () => {
+  modal.querySelector("#closeModalButton").addEventListener("click", () => {
     modal.remove();
   });
 
@@ -109,9 +109,3 @@ function showModal(movie) {
 
   document.body.appendChild(modal);
 }
-
-const bookmarkMovie = document.getElementById("bookmarkMovie");
-bookmarkMovie.addEventListener("click", async () => {
-  const searchResults = document.getElementById("searchResults");
-  searchResults.innerHTML = ""; // 이전 검색 결과 초기화
-});
