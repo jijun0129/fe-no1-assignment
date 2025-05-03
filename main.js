@@ -1,14 +1,43 @@
 import { Top5Movies, searchMovies, getMovieDetails } from "./api/tmdbApi.js";
 
-const searchButton = document.getElementById("searchButton");
+async function getPopularMovies() {
+  const top5Movies = await Top5Movies();
 
+  const searchTitle = document.getElementById("searchTitle");
+  searchTitle.innerHTML = "인기 영화";
+  const searchResults = document.getElementById("searchResults");
+  searchResults.innerHTML = "";
+  top5Movies.forEach((movie, index) => {
+    const movieCard = document.createElement("div");
+    movieCard.className = "movieCard";
+    movieCard.id = movie.id;
+    movieCard.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
+        <h3>${movie.title}</h3>
+        <p>평점: ${movie.vote_average}</p>
+        <p>${movie.overview}</p>
+      `;
+
+    searchResults.appendChild(movieCard);
+  });
+}
+
+getPopularMovies();
+const popularMovie = document.getElementById("popularMovie");
+popularMovie.addEventListener("click", async () => {
+  await getPopularMovies();
+});
+
+const searchButton = document.getElementById("searchButton");
 searchButton.addEventListener("click", async () => {
   const searchInput = document.getElementById("searchInput");
   const query = searchInput.value;
   const data = await searchMovies(query);
-  console.log(data);
+
   const searchError = document.getElementById("searchError");
   searchError.innerHTML = "";
+  const searchTitle = document.getElementById("searchTitle");
+  searchTitle.innerHTML = "검색 결과";
   const searchResults = document.getElementById("searchResults");
   searchResults.innerHTML = ""; // 이전 검색 결과 초기화
 
@@ -81,21 +110,8 @@ function showModal(movie) {
   document.body.appendChild(modal);
 }
 
-const top5Movies = await Top5Movies();
-console.log(top5Movies);
-
-const searchTitle = document.getElementById("searchTitle");
-searchTitle.innerText = "현재 Top5 Movie"; // 이전 검색 결과 초기화
-top5Movies.forEach((movie, index) => {
-  const movieCard = document.createElement("div");
-  movieCard.className = "movieCard";
-  movieCard.id = movie.id;
-  movieCard.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
-        <h3>${movie.title}</h3>
-        <p>평점: ${movie.vote_average}</p>
-        <p>${movie.overview}</p>
-      `;
-
-  searchResults.appendChild(movieCard);
+const bookmarkMovie = document.getElementById("bookmarkMovie");
+bookmarkMovie.addEventListener("click", async () => {
+  const searchResults = document.getElementById("searchResults");
+  searchResults.innerHTML = ""; // 이전 검색 결과 초기화
 });

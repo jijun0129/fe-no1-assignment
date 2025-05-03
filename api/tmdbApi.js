@@ -7,6 +7,7 @@ export async function Top5Movies() {
     throw new Error("Network response was not ok" + response.statusText);
   }
   const data = await response.json();
+  console.log(data.results);
 
   return data.results.slice(0, 5);
 }
